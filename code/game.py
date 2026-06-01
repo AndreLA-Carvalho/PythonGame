@@ -1,6 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import pygame
+try:
+    import pygame  # type: ignore[import]
+except ImportError as e:
+    raise ImportError("pygame is required to run this game. Install it with 'pip install pygame'.") from e
 
 from code.const import MENU_OPTION, WIN_HEIGHT, WIN_WIDTH
 from code.level import Level
