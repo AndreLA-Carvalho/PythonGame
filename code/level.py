@@ -1,11 +1,12 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+import random
 import sys
 
 import pygame  # type: ignore[import]
 
-from code.const import COLOR_WHITE, WIN_HEIGHT
+from code.const import COLOR_WHITE, EVENT_ENEMY, MENU_OPTION, SPAWN_TIME, WIN_HEIGHT
 
 from code.entity import Entity
 from code.entityFactory import EntityFactory
@@ -18,8 +19,13 @@ class Level:
         self.game_mode = game_mode
         self.entity_list: list[Entity] = []
         self.entity_list.extend(EntityFactory.get_entity('level1bg'))
+        self.entity_list.append(EntityFactory.get_entity('Player1'))
         self.timeout = 20000 # Tempo para completar o nível em milissegundos (20 segundos)
+        if game_mode in [MENU_OPTION[1], MENU_OPTION[2]]:
+            self.entity_list.append(EntityFactory.get_entity('Player2'))
+        pygame.time.set_timer(EVENT_ENEMY, SPAWN_TIME) # Define um timer para spawnar inimigos a cada SPAWN_TIME milissegundos (4 segundos)
 
+        
     def run(self):
         pygame.mixer_music.load(f'./asset/{self.name}.mp3') # Carrega a música do nível
         pygame.mixer_music.play(-1) # Reproduz a música do nível em loop
@@ -34,6 +40,10 @@ class Level:
                 if event.type == pygame.QUIT:
                     pygame.quit() # Close window
                     sys.exit() # end pygame
+                if event.type == EVENT_ENEMY:
+                    choice = random.choice(('Enemy1', 'Enemy2')) # Escolhe aleatoriamente entre os dois tipos de inimigos
+                    self.entity_list.append(EntityFactory.get_entity(choice)) # Adiciona o inimigo escolhido à lista de entidades do nível
+                    
                     
             self.level_text(text_size=14, text=f'{self.name} - Timeout: {self.timeout / 1000 :.1f}s', text_color=COLOR_WHITE, text_pos=(10, 5)) # Exibe o nome do nível e o tempo restante
             self.level_text(text_size=14, text=f'fps: {clock.get_fps():.0f}', text_color=COLOR_WHITE, text_pos=(10, WIN_HEIGHT - 35)) # Exibe o fps do jogo
