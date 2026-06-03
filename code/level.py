@@ -10,6 +10,7 @@ from code.const import COLOR_WHITE, EVENT_ENEMY, MENU_OPTION, SPAWN_TIME, WIN_HE
 
 from code.entity import Entity
 from code.entityFactory import EntityFactory
+from code.entityMediator import EntityMediator
 
 
 class Level:
@@ -49,6 +50,9 @@ class Level:
             self.level_text(text_size=14, text=f'fps: {clock.get_fps():.0f}', text_color=COLOR_WHITE, text_pos=(10, WIN_HEIGHT - 35)) # Exibe o fps do jogo
             self.level_text(text_size=14, text=f'entidades:{len(self.entity_list)}', text_color=COLOR_WHITE, text_pos=(10, WIN_HEIGHT - 20)) # Exibe o número de entidades na tela
             pygame.display.flip()  # Atualiza a janela
+            # Collisions
+            EntityMediator.verify_collision(entity_list=self.entity_list) # Verifica colisões entre as entidades
+            EntityMediator.verify_health(entity_list=self.entity_list) # Verifica a saúde das entidades e remove as que tiverem saúde menor ou igual a 0
         pass
     
     def level_text(self, text_size: int, text: str, text_color: tuple, text_pos: tuple):
