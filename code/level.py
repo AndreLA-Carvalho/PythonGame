@@ -8,9 +8,11 @@ import pygame  # type: ignore[import]
 
 from code.const import COLOR_WHITE, EVENT_ENEMY, MENU_OPTION, SPAWN_TIME, WIN_HEIGHT
 
+from code.enemy import Enemy
 from code.entity import Entity
 from code.entityFactory import EntityFactory
 from code.entityMediator import EntityMediator
+from code.player import Player
 
 
 class Level:
@@ -34,8 +36,13 @@ class Level:
         while True:
             clock.tick(60) # Limita o jogo a 60 frames por segundo
             for ent in self.entity_list:
-                self.window.blit(source=ent.surf, dest=ent.rect)
-                ent.move()
+                self.window.blit(source=ent.surf, dest=ent.rect) # Desenha a entidade na janela
+                ent.move() # Move a entidade
+                if isinstance(ent, (Player, Enemy)): # Se a entidade for um jogador ou um inimigo, verifica se ele atirou
+                    shoot = ent.shoot() # Verifica se o jogador atirou e retorna o tiro criado
+                    if shoot is not None: # Se o jogador atirou, adiciona o tiro à lista de entidades do nível
+                        self.entity_list.append(shoot) # Adiciona o tiro criado à lista de entidades do nível
+
             pygame.display.flip()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
