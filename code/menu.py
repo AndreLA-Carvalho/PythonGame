@@ -3,7 +3,7 @@
 from pygame import Font, Rect, Surface
 import pygame.image
 
-from code.const import COLOR_ORANGE, COLOR_WHITE, COLOR_YELLOW, MENU_OPTION, WIN_WIDTH
+from code.const import C_ORANGE, C_WHITE, C_YELLOW, MENU_OPTION, WIN_WIDTH
 
 class Menu:
     def __init__(self, window):
@@ -19,15 +19,15 @@ class Menu:
         while True:
             # Draw images
             self.window.blit(source=self.surf, dest=self.rect) # Desenha a imagem do menu na janela
-            self.menu_text(50, "Mountain", COLOR_ORANGE, ((WIN_WIDTH / 2), 70))
-            self.menu_text(50, "Shooter", COLOR_ORANGE, ((WIN_WIDTH / 2), 120))
+            self.menu_text(50, "Mountain", C_ORANGE, ((WIN_WIDTH / 2), 70))
+            self.menu_text(50, "Shooter", C_ORANGE, ((WIN_WIDTH / 2), 120))
             
             for i in range(len(MENU_OPTION)):
                 if i == menu_option:
-                    self.menu_text(20, MENU_OPTION[i], COLOR_YELLOW, ((WIN_WIDTH / 2), 200 + 25 * i))
+                    self.menu_text(20, MENU_OPTION[i], C_YELLOW, ((WIN_WIDTH / 2), 200 + 25 * i))
                 
                 else:
-                    self.menu_text(20, MENU_OPTION[i], COLOR_WHITE, ((WIN_WIDTH / 2), 200 + 25 * i))
+                    self.menu_text(20, MENU_OPTION[i], C_WHITE, ((WIN_WIDTH / 2), 200 + 25 * i))
             pygame.display.flip() # Atualiza a janela
             
             # Check for all events
