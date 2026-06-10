@@ -7,7 +7,8 @@ from code.playerShot import PlayerShot
 
 
 class EntityMediator:
-    
+
+# Verifica colisão da entidade com a janela e remove a saúde da entidade se ela colidir com a janela    
     @staticmethod
     def __verify_collision_window(ent: Entity): # Verifica colisão da entidade com a janela e remove a saúde da entidade se ela colidir com a janela
         if isinstance(ent, Enemy):
@@ -19,7 +20,8 @@ class EntityMediator:
         if isinstance(ent, EnemyShot):
             if ent.rect.right <= 0:
                 ent.health = 0
-                
+         
+# Verifica colisão entre as entidades e remove a saúde das entidades se elas colidirem                
     @staticmethod
     def __verify_collision_entity(ent1, ent2):
         valid_interaction = False
@@ -38,7 +40,8 @@ class EntityMediator:
                 ent2.health -= ent1.damage # Remove a saúde da entidade 2 com base no dano da entidade 1
                 ent1.last_dmg = ent2.name # Define a última entidade que causou dano a entidade 1 como a entidade 2
                 ent2.last_dmg = ent1.name # Define a última entidade que causou dano a entidade 2 como a entidade 1
-
+                
+# Dá pontos para o jogador com base no tipo do inimigo morto
     @staticmethod
     def __give_score(enemy: Enemy, entity_list: list[Entity]): # Dá pontos para o jogador com base no tipo do inimigo morto
         if enemy.last_dmg == 'Player1Shot':
@@ -50,7 +53,7 @@ class EntityMediator:
                 if ent.name == 'Player2':
                     ent.score += enemy.score
 
-
+# Verifica colisões entre as entidades e com a janela, e verifica a saúde das entidades e remove as que tiverem saúde menor ou igual a 0
     @staticmethod
     def verify_collision(entity_list: list[Entity]): # Verifica colisões entre as entidades e com a janela
         for i in range(len(entity_list)):
@@ -59,7 +62,8 @@ class EntityMediator:
             for j in range(i+1, len(entity_list)): # Verifica colisão entre as entidades e remove a saúde das entidades se elas colidirem
                 entity2 = entity_list[j] 
                 EntityMediator.__verify_collision_entity(entity1, entity2) 
-            
+
+# Verifica a saúde das entidades e remove as que tiverem saúde menor ou igual a 0            
     @staticmethod
     def verify_health(entity_list: list[Entity]): # Verifica a saúde das entidades e remove as que tiverem saúde menor ou igual a 0
         for ent in entity_list:

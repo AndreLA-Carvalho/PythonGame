@@ -20,6 +20,12 @@ class EntityFactory:
                     list_bg.append(Background(f'level1bg{i}', position)) # Adiciona o background criado à lista de backgrounds do nível 1
                     list_bg.append(Background(f'level1bg{i}', (WIN_WIDTH, 0))) # Adiciona um segundo background com a mesma imagem, mas posicionado à direita do primeiro, para criar um efeito de scrolling infinito
                 return list_bg # Retorna a lista de backgrounds do nível 1
+            case 'level2bg': 
+                list_bg = [] 
+                for i in range(5): # level2bg images number
+                    list_bg.append(Background(f'level2bg{i}', position)) 
+                    list_bg.append(Background(f'level2bg{i}', (WIN_WIDTH, 0))) 
+                return list_bg 
             case 'Player1':
                 return Player(name = 'Player1', position = (10, WIN_HEIGHT / 2 - 30)) 
             case 'Player2':
