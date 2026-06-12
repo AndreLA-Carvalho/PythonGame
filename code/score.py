@@ -22,6 +22,8 @@ class Score:
         while True:  
             self.window.blit(source= self.surf, dest=self.rect)
             self.score_text(48, 'YOU WIN!!', C_YELLOW, SCORE_POS['Title'])
+            text = 'Enter Player 1 name (4 characters)'
+            score = player_score[0]
             if game_mode == MENU_OPTION[0]: 
                 score = player_score[0]
                 text = 'Enter Player 1 name (4 characters)'
@@ -67,7 +69,7 @@ class Score:
         
         for player_score in list_score:
             id_, name, score, date = player_score
-            self.score_text (20, f'{name}    {score :05d} {date}', C_YELLOW, SCORE_POS[list_score.index(player_score)])
+            self.score_text (20, f'{name}    {score:05d} {date}', C_YELLOW, SCORE_POS[list_score.index(player_score)])
                             
         while True:
             for event in pygame.event.get():
@@ -86,8 +88,8 @@ class Score:
         text_rect: pygame.Rect = text_surf.get_rect(center=text_center_pos)
         self.window.blit(source=text_surf, dest=text_rect)
         
-    def get_formatted_date():
-        current_datetime = datetime.now()
-        current_time = current_datetime.strftime("%H:%M")
-        current_date = current_datetime.strftime("%d/%m/%y")
-        return f"{current_time} - {current_date}"
+def get_formatted_date():
+    current_datetime = datetime.now()
+    current_time = current_datetime.strftime("%H:%M")
+    current_date = current_datetime.strftime("%d/%m/%y")
+    return f"{current_time} - {current_date}"

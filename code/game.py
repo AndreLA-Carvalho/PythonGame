@@ -5,6 +5,8 @@ try:
 except ImportError as e:
     raise ImportError("pygame is required to run this game. Install it with 'pip install pygame'.") from e
 
+import sys
+
 from code.const import MENU_OPTION, WIN_HEIGHT, WIN_WIDTH
 from code.level import Level
 from code.menu import Menu
@@ -37,8 +39,8 @@ class Game:
                 pygame.quit() # Close window
                 quit() # end pygame
             else: 
-                pass
-                
+                pygame.quit() # Close window
+                sys.exit() # end pygame
             
 
 

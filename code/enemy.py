@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from code.const import ENTITY_SHOT_DELAY, ENTITY_SPEED, WIN_WIDTH
+from code.const import ENTITY_SHOT_DELAY, ENTITY_SPEED
 from code.enemyShot import EnemyShot
 from code.entity import Entity
 
@@ -12,7 +12,7 @@ class Enemy(Entity):
         self.shot_delay = ENTITY_SHOT_DELAY[self.name] # Define o tempo de delay entre os tiros do inimigo
         
 
-    def move(self, ):
+    def move(self):
         self.rect.centerx -= ENTITY_SPEED[self.name]
         
     def shoot(self):

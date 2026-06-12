@@ -11,7 +11,7 @@ class Menu:
         self.surf = pygame.image.load('./asset/menuBg.png').convert_alpha() # Carrega a imagem do menu
         self.rect = self.surf.get_rect(left=0, top=0) # cria o retângulo da imagem do menu
 
-    def run(self, ):
+    def run(self):
         menu_option = 0 # Opção do menu selecionada, começa na primeira opção
         pygame.mixer_music.load('./asset/menu.mp3') # Carrega a música do menu
         pygame.mixer_music.play(-1) # Reproduz a música do menu em loop

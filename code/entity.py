@@ -20,5 +20,5 @@ class Entity(ABC):
         self.last_dmg = 'None' # Define a última entidade que causou dano a esta entidade, inicialmente 'None'
 
     @abstractmethod
-    def move(self, ):
+    def move(self):
         pass
