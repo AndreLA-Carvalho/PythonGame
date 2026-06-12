@@ -37,6 +37,7 @@ class Level:
     def run(self, player_score: list[int]):
         pygame.mixer_music.load(f'./asset/{self.name}.mp3') # Carrega a música do nível
         pygame.mixer_music.play(-1) # Reproduz a música do nível em loop
+        pygame.mixer_music.set_volume(0.3)
         clock = pygame.time.Clock() # Cria um relógio para controlar o tempo do jogo
         while True:
             clock.tick(60) # Limita o jogo a 60 frames por segundo
